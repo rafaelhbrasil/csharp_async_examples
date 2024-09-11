@@ -11,12 +11,13 @@ namespace AsyncBenchmarks.ConsoleApp.Benchmarks
     {
         protected abstract void InnerRun();
 
-        public void Run()
+        public override Task Run()
         {
             Actions.ResetCounter();
             Console.WriteLine($"Running {GetType().Name}...");
             InnerRun();
             Console.WriteLine($"Finished {GetType().Name}.");
+            return Task.CompletedTask;
         }
     }
 }

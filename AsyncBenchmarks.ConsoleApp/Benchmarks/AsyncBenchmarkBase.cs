@@ -12,7 +12,7 @@ namespace AsyncBenchmarks.ConsoleApp.Benchmarks
     {
         protected abstract Task InnerRun();
 
-        public async Task Run()
+        public override async Task Run()
         {
             Actions.ResetCounter();
             Console.WriteLine($"Running {GetType().Name}...");

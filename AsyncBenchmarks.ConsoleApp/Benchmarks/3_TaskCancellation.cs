@@ -13,16 +13,14 @@ namespace AsyncBenchmarks.ConsoleApp.Benchmarks
 
         protected override void InnerRun()
         {
-            Console.WriteLine($"Press ENTER to cancel.");
             var ctSource = new CancellationTokenSource();
             ctSource.Token.Register(() => Console.WriteLine("Cancellation requested."));
 
             _ = Actions.DoLongRunningOperation(ctSource.Token);
             
+            Console.WriteLine($"Press ENTER to cancel.");
             Console.ReadLine();
             ctSource.Cancel();
-
-            Console.WriteLine($"Finished.");
         }
     }
 }

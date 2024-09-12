@@ -14,7 +14,6 @@ namespace TestSynchronizationContext
 
         public override void Post(SendOrPostCallback d, object state)
         {
-            Console.WriteLine("Posted from thread: {0}, {1}", Thread.CurrentThread.ManagedThreadId, DateTime.Now);
             _queue.Add(() => d(state));
         }
 
@@ -28,13 +27,11 @@ namespace TestSynchronizationContext
             Action a;
             while (_queue.TryTake(out a, Timeout.Infinite))
                 a();
-            Console.WriteLine("InvokeCallbacks exited.");
         }
 
         public void Complete()
         {
             _queue.CompleteAdding();
-            Console.WriteLine("Completed.");
         }
 
         public static void Run(Func<Task> func)

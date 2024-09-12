@@ -9,7 +9,7 @@ namespace AsyncBenchmarks.ConsoleApp.Benchmarks
 {
     public class ValueTaskVsTask : AsyncBenchmarkBase
     {
-        public override int Number => 8;
+        public override int Number => 9;
 
         protected override async Task InnerRun()
         {

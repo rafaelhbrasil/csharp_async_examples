@@ -13,7 +13,7 @@ namespace AsyncBenchmarks.ConsoleApp.Benchmarks
 
         protected override async Task InnerRun()
         {
-            int times = 50000;
+            int times = 5_000_000;
             Console.WriteLine($"Running Task {times} times...");
             var timeTasks = await CustomTimer.ComputeTime(async () => await Actions.DoSomethingAsync(), times, true);
 

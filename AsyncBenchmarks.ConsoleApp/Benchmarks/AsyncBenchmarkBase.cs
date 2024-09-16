@@ -19,10 +19,5 @@ namespace AsyncBenchmarks.ConsoleApp.Benchmarks
             await InnerRun();
             Console.WriteLine($"Finished {GetType().Name}.");
         }
-
-        protected string GetPath(string callerFile = "", [CallerFilePath] string filePath = "")
-        {
-            return filePath;
-        }
     }
 }

@@ -13,32 +13,37 @@ namespace AsyncBenchmarks.ConsoleApp.Benchmarks
 
         protected override async Task InnerRun()
         {
-            Console.WriteLine($"Running Task and awaiting the result...");
+            Console.WriteLine($"1 Running Task and awaiting the result...");
             try
             {
-                await Actions.DoSomethingAndThrowError("Exeption awaited");
+                await Actions.DoSomethingAndThrowError(message: "Exception awaited");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception captured: '{ex.Message}'");
+                Console.WriteLine($"2 Exception captured: '{ex.Message}'");
             }
+            Console.WriteLine("3 Finished");
 
-            Console.WriteLine($"Running Task and NOT awaiting the result...");
+            Console.WriteLine($"1 Running Task and NOT awaiting the result...");
             try
             {
-                _ = Actions.DoSomethingAndThrowError("Exeption NOT awaited");
+                _ = Actions.DoSomethingAndThrowError(message: "Exception NOT awaited");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception captured: '{ex.Message}'");
+                Console.WriteLine($"2 Exception captured: '{ex.Message}'");
             }
+            Console.WriteLine("3 Finished");
 
-            Console.WriteLine($"Running Task and NOT awaiting the result, but with a Continuation set...");
-            _ = Actions.DoSomethingAndThrowError("Exeption NOT awaited")
+
+            Console.WriteLine($"1 Running Task and NOT awaiting the result, but with a Continuation set...");
+            _ = Actions.DoSomethingAndThrowError(message: "Exception NOT awaited")
                 .ContinueWith((task) =>
                 {
-                    Console.WriteLine($"Exception captured by continuation: '{task.Exception?.InnerException?.Message}'");
+                    Console.WriteLine($"2 Exception captured by continuation: '{task.Exception?.InnerException?.Message}'");
                 }, TaskContinuationOptions.OnlyOnFaulted);
+
+            Console.WriteLine("3 Finished");
 
             await Task.Delay(1000);
         }
